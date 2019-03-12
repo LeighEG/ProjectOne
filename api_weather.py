@@ -48,7 +48,7 @@ def get_weather_data(city):
 	print('Lattitude: ' + json_lattitude)                            
 	print('Longitude: ' + json_longitude)
 	print('Thank you') 
-	print('this is the second change') 
+	
 	                                        
   
 while True:
