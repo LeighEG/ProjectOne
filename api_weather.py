@@ -47,7 +47,7 @@ def get_weather_data(city):
 	print('LOW: ' + str(low_temp_f))                                 
 	print('Lattitude: ' + json_lattitude)                            
 	print('Longitude: ' + json_longitude)
-	print('Thank you') 
+	
 	
 	                                        
   
