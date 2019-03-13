@@ -1,12 +1,22 @@
 import urllib.parse
 import requests
-import os
+from os import system, name
 
 
-		                          	                     	
+
+def clear(): 
+  
+    # for windows 
+    if name == 'nt': 
+        _ = system('cls') 
+  
+    # for mac and linux(here, os.name is 'posix') 
+    else: 
+        _ = system('clear')
+        		                          	                     	
 def get_weather_data(city):
 	'''
-	Accesss metaweather api and extracts data for a user input city
+	Accesss metaweather api and extract data for a user input city
 	'''
 	main_api = 'https://www.metaweather.com/api/location/search/?'   
 	url = main_api + urllib.parse.urlencode({'query': city})     
@@ -19,7 +29,7 @@ def get_weather_data(city):
 	try:
 		json_city = json_data[0]['title']                                
 	except:
-		os.system('cls')
+		clear()		
 		print('City is not available. Please try again.')
 		return
 	'''
@@ -33,23 +43,32 @@ def get_weather_data(city):
 	json_state = json_data['parent']['title']                                 
 	json_weather = json_data['consolidated_weather'][0]['weather_state_name'] 
 	json_high_temp = json_data['consolidated_weather'][0]['max_temp']         
-	high_temp_f = int((json_high_temp * 9/5) + 32)                                 
+	high_temp_f = int((json_high_temp * 1.8) + 32)                                 
 	json_low_temp = json_data['consolidated_weather'][0]['min_temp']          
-	low_temp_f = int((json_low_temp * 9/5) + 32)
+	low_temp_f = int((json_low_temp * 1.8) + 32)
+	json_current_temp = json_data['consolidated_weather'][0]['the_temp']
+	json_current_temp_f = int((json_current_temp * 1.8) + 32)
+	json_humidity = json_data['consolidated_weather'][0]['humidity']
+	
+	 
 	'''
-	Clear screen in windows and print data from metaweather api
+	Clear screen and print data from metaweather api
 	'''                                  
-	os.system('cls')                                                               
-	print(json_city + ', ' + json_state)                             
+	clear()                                                                
+	print('Weather for: ' + json_city + ', ' + json_state)                             
 	print()
-	print('Today: ' + json_weather)                                  
+	print('Today: ' + json_weather)
+	print('Now: ' + str(json_current_temp_f))                                 
 	print('HIGH: ' + str(high_temp_f))                               
-	print('LOW: ' + str(low_temp_f))                                 
-	print('Lattitude: ' + json_lattitude)                            
+	print('LOW: ' + str(low_temp_f)) 
+	print('\nHUMIDITY: ' + str(json_humidity))                           
+	print('\nLattitude: ' + json_lattitude)                            
 	print('Longitude: ' + json_longitude)
 	
 	
-	                                        
+'''
+main
+'''	                                        
   
 while True:
 	
